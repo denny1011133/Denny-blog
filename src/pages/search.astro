@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Search" activeLink="search">
+  <input id="searchBox" aria-label="search box" autofocus type="text" placeholder="Type here"
+    class="input input-bordered input-info w-full max-w-lg block mx-auto" />
+
+  <div id="results" class="mt-12 grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-8 justify-items-center"></div>
+</BaseLayout>
+<script>
+ import "../scripts/search.ts";
+</script>
