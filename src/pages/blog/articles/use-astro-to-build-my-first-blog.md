@@ -16,13 +16,17 @@ description: Learning how to build a website using Astro.js
 1. **A good choice for building content-focused website, not application-focused website**
 2. **leverages server-side rendering over client-side rendering as much as possible**
 
-::: info
+:::info
+What are the issues when using SPA ?
 
-It may harm the page performance and impact TTI with SPA architecture
+=> With Single Page Applications, it may harm page performance and impact Time to Interactive (TTI).
 
-Time to Interactive(TTI): TTI measures how long it takes a page to become fully interactive
+What is TTI ?
 
+=> Time to Interactive(TTI): It measures how long it takes a page to become fully interactive
 :::
+
+
 
 ## MPA vs. SPA
 
@@ -31,11 +35,10 @@ Time to Interactive(TTI): TTI measures how long it takes a page to become fully 
 
 3. In SPAs, the router is handled locally and navigation to new pages is accomplished without hitting the server.
 
+
 :::info
 SPAs can also offer more powerful transitions across page navigation because they control so much about page rendering. To match this support, MPAs leverage tools like Hotwire’s Turbo that mimic client routing by also controlling navigation in the browser. The HTML is still rendered on the server, but Turbo can now display a seamless transition between pages similar to client routing in an SPA.
 :::
-
-
 
 ## Astro Islands
 
@@ -57,6 +60,10 @@ The technique that this architectural pattern builds on is known as **partial or
 But sometimes, client-side JavaScript is required for creating interactive UI. Instead of forcing your entire page to become an SPA-like JavaScript application, ==Astro asks you to create an island==.
 
 With Astro Islands, ==the vast majority of your site remains pure, lightweight HTML and CSS==.
+
+
+[Comparing Astro to React components](https://blog.logrocket.com/understanding-astro-islands-architecture/#astro-islands)
+
 
 ## What are the benefits of Island architecture?
 
