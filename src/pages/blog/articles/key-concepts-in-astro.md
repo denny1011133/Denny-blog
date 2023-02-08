@@ -7,9 +7,9 @@ tags:
   - Astro.js
 description: Some key concepts in Astro.js
 ---
-## `pages` folder
+## Static routes
 
-Astro uses file-based routing to take control of the route path inside pages folder.
+Astro Components (.astro) and Markdown Files (.md) in the `src/pages` directory will automatically become pages on the website
 
 
 ## `.astro` file 
@@ -34,6 +34,10 @@ tags: ["astro", "blogging", "learning in public"]
 ---
 content goes here 
 ```
+
+:::info
+[Astro can use data from frontmatter as props in its layout component](https://docs.astro.build/en/guides/markdown-content/#frontmatter-layout)
+:::
 
 ## Add dynamic content on `.astro` file
 
@@ -69,7 +73,7 @@ const name = "Astro"
 ```
 
 :::info
-You can also define your props with TypeScript 
+[You can also define your props with TypeScript ](https://docs.astro.build/en/guides/typescript/#component-props)
 :::
 
 ## Write client side script
@@ -84,7 +88,7 @@ Importing scripts is a good way to write your client-side scripts.
 </body>
 ```
 
-:::info
+:::warning
 
 Some JavaScript expressions are executed at build time, such as mapping, variable usage, and conditional rendering, and then the code is **"thrown away"** However, the JavaScript in a script tag is still sent to the browser.
 
@@ -117,7 +121,7 @@ Import your custom layout in `.md` file frontmatter.
 
 ```yaml
 ---
-layout: ../../layouts/MarkdownPostLayout.astro <!-- Layout will go here -->
+layout: ../../layouts/MarkdownPostLayout.astro <!-- using layout for your md file -->
 title: 'My First Blog Post'
 pubDate: 2022-07-01
 description: 'This is the first post of my new Astro blog.'
@@ -128,32 +132,41 @@ author: 'Astro Learner'
 
 
 :::info
-When you include the layout frontmatter property in a .md file, **all of your frontmatter YAML values become props and are available to the layout file**.
+When you include the layout frontmatter property in a `.md` file, **all of your frontmatter YAML values become props and are available to the layout file**.
 :::
 
 
 
-## Directives (unfinished)
+## Directives
 
 Template directives are a special kind of HTML attribute available inside of any Astro component template (.astro files), and some can also be used in .mdx files.
 
 Template directives are used to control an element or component’s behavior in some way.
 
-```
+
+### `class:list` 
+
+class:list={...} takes an array of class values and converts them into a class string.
+
+```html
 <!-- This -->
 <span class:list={[ 'hello goodbye', { hello: true, world: true }, new Set([ 'hello', 'friend' ]) ]} />
 <!-- Becomes -->
 <span class="hello goodbye world friend"></span>
 ```
+### `is:global` 
+
+By default, Astro automatically scopes style CSS rules to the component. You can opt-out of this behavior with the `is:global` directive.
 
 ```html
 <style is:global>
   body a { color: red; }
 </style>
 ```
+[Directives Reference](https://docs.astro.build/en/reference/directives-reference/)
 
 
-## Astro.glob()
+## Astro.glob() API
 
 a way to load many local files into your static site setup.  It’s **asynchronous**, and returns an array of the exports from matching files.
 
@@ -161,20 +174,20 @@ a way to load many local files into your static site setup.  It’s **asynchrono
 
 ## Dynamic page routing
 
-You can create entire sets of pages dynamically using `.astro` files that export a `getStaticPaths()` function.
+You can create entire sets of pages dynamically using `[param].astro` files that export a `getStaticPaths()` function.
 
-The `getStaticPaths` function returns an array of page routes, and all of the pages at those routes will **use the same template defined in the file**.
+The `getStaticPaths` function **returns an array of page routes**, and all of the pages at those routes will **use the same template defined in the file**.
 
 :::info
 Notice that using square brackets to name your file
 
-Ex: `src/pages/tags/[tag].astro` ->  `mysite/tags/astro`.
+Ex: `src/pages/tags/[tag].astro` ->  `mysite/tags/astro` or `mysite/tags/superhero`...
 :::
 
 
 :::info
 
-In Astro’s default static output mode, these pages are generated at build time(SSG), and so you must predetermine the list of authors that get a corresponding file. In SSR mode, a page will be generated on request for any route that matches.
+In Astro’s default static output mode, these pages are generated at build time(SSG), and so **you must predetermine** the list of authors that get a corresponding file. In [SSR mode](https://docs.astro.build/en/guides/server-side-rendering/), a page will be generated on request for any route that matches.
 :::
 
 ```javascript
@@ -190,18 +203,49 @@ export async function getStaticPaths() {
   ];
 }
 
-// params will be used in the route, such as "localhost:3000/tags/astro".
+// params will be used in the route, such as "mysite/tags/astro".
 // props are data that you want to pass to those pages
 ```
 
+ 
+## Pagination
+
+Astro supports built-in pagination for large collections of data
+
+The method of doing pagination is similar to setting dynamic routes.
+
+```jsx
+---
+export async function getStaticPaths({ paginate }) {
+  const astronautPages = [{
+    astronaut: 'Neil Armstrong',
+  }, {
+    astronaut: 'Buzz Aldrin',
+  }, {
+    astronaut: 'Sally Ride',
+  }, {
+    astronaut: 'John Glenn',
+  }];
+  // Generate pages from our array of astronauts, with 2 to a page
+  return paginate(astronautPages, { pageSize: 2 });
+}
+// All paginated data is passed on the "page" prop
+const { page } = Astro.props;
+---
+
+<!--Display the current page number. Astro.params.page can also be used!-->
+<h1>Page {page.currentPage}</h1>
+<ul>
+  <!--List the array of astronaut info-->
+  {page.data.map(({ astronaut }) => <li>{astronaut}</li>)}
+</ul>
+```
+
+
 ## Reference
 
-* [More flexibility in URL routing](https://docs.astro.build/en/core-concepts/routing/#static-routes)
-* [Docs for SSR mode](https://docs.astro.build/en/guides/server-side-rendering/)
-
-
-
-
+* [Learn more about flexibility in URL routing](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes)
+* [Pagination](https://docs.astro.build/en/core-concepts/routing/#pagination)
 
 
 

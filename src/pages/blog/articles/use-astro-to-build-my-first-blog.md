@@ -7,88 +7,251 @@ tags:
   - Astro.js
 description: Learning how to build a website using Astro.js
 ---
-## What is Astro ?
+## Static routes
 
-**A content-focused and a server-first MPA architecture for building website**
+Astro Components (.astro) and Markdown Files (.md) in the `src/pages` directory will automatically become pages on your website
 
-## Why Astro ?
 
-1. **A good choice for building content-focused website, not application-focused website**
-2. **leverages server-side rendering over client-side rendering as much as possible**
+## `.astro` file 
+
+`.astro` files are responsible for the page's user interface, the syntax is similar to JSX in React.
+
+
+## frontmatter
+
+The information at the top of the `.md` file, inside the code fences, is called frontmatter that written in YAML format. This data—including tags and a post image—is information about your post that Astro can use.
+
+```yaml
+---
+title: 'My First Blog Post'
+pubDate: 2022-07-01
+description: 'This is the first post of my new Astro blog.'
+author: 'Astro Learner'
+image:
+    url: 'https://astro.build/assets/blog/astro-1-release-update/cover.jpeg' 
+    alt: 'The Astro logo with the word One.'
+tags: ["astro", "blogging", "learning in public"]
+---
+content goes here 
+```
 
 :::info
-What are the issues when using SPA ?
-
-=> With Single Page Applications, it may harm page performance and impact Time to Interactive (TTI).
-
-What is TTI ?
-
-=> Time to Interactive(TTI): It measures how long it takes a page to become fully interactive
+[Astro can use data from frontmatter as props in its layout component](https://docs.astro.build/en/reference/api-reference/#astroprops)
 :::
 
+## Add dynamic content on `.astro` file
 
 
-## MPA vs. SPA
+Use JavaScript expressions to define variables in frontmatter and use it in **curly brace** on `.astro`
 
-1. MPAs render most of the HTML on a server and request new HTML from the server each time a new page is navigated to. This results in much faster first load experiences compared to SPAs.
-2. SPAs load JavaScript and render HTML locally, offering faster second and subsequent page load experiences once the JavaScript has been loaded in the browser.
 
-3. In SPAs, the router is handled locally and navigation to new pages is accomplished without hitting the server.
+:::warning
+The Astro frontmatter script contains only JavaScript.
+:::
+
+## Props in Astro Component 
+
+reusable component (src/components/GreetingHeadline.astro)
+
+```jsx
+---
+const { greeting, name } = Astro.props;
+---
+<h2>{greeting}, {name}!</h2>
+```
+
+usage (src/components/GreetingCard.astro)
+
+```jsx
+---
+import GreetingHeadline from './GreetingHeadline.astro';
+const name = "Astro"
+---
+<h1>Greeting Card</h1>
+<GreetingHeadline greeting="Hi" name={name} />
+<p>I hope you have a wonderful day!</p>
+```
+
+:::info
+[You can also define your props with TypeScript ](https://docs.astro.build/en/guides/typescript/#component-props)
+:::
+
+## Write client side script
+
+Importing scripts is a good way to write your client-side scripts.
+
+```jsx
+ <Footer />
+ <script>
+   import "../scripts/menu.js";
+ </script>
+</body>
+```
+
+:::warning
+
+Some JavaScript expressions are executed at build time, such as mapping, variable usage, and conditional rendering, and then the code is **"thrown away"** However, the JavaScript in a script tag is still sent to the browser.
+
+:::
+
+## slot into child componet
+
+The `<slot />` allows you to inject child content written between opening and closing `<Component></Component>` tags to any `.astro `file.
+
+```jsx
+<div id="content-wrapper">
+  <Header />
+  <Logo />
+  <h1>{title}</h1>
+  <slot />  <!-- children will go here -->
+  <Footer />
+</div>
+```
+
+```jsx
+<Wrapper title="Fred's Page">
+  <h2>All about Fred</h2>
+  <p>Here is some stuff about Fred.</p>
+</Wrapper>
+```
+
+## Use layout for your `.md` files to customize blog 
+
+Import your custom layout in `.md` file frontmatter.
+
+```yaml
+---
+layout: ../../layouts/MarkdownPostLayout.astro <!-- using layout for your md file -->
+title: 'My First Blog Post'
+pubDate: 2022-07-01
+description: 'This is the first post of my new Astro blog.'
+author: 'Astro Learner'
+...
+---
+```
 
 
 :::info
-SPAs can also offer more powerful transitions across page navigation because they control so much about page rendering. To match this support, MPAs leverage tools like Hotwire’s Turbo that mimic client routing by also controlling navigation in the browser. The HTML is still rendered on the server, but Turbo can now display a seamless transition between pages similar to client routing in an SPA.
-:::
-
-## Astro Islands
-
-
-**Every component can choose how and when to ship JS**
-
-
-> Multiple islands can exist on a page, and an island always renders in isolation.
-
-The technique that this architectural pattern builds on is known as **partial or selective hydration**. Astro leverages this technique behind the scenes, powering your islands automatically.
-
-![](https://i.imgur.com/Hsqda0o.png)
-
-
-## How it works ?
-
-**Astro generates every website with zero client-side JavaScript by default**. Use a frontend UI component built with React, Preact, Svelte, Vue, SolidJS, AlpineJS, or Lit and Astro will automatically render it to HTML ==ahead of time and then strip out all of the JavaScript==. This keeps every site fast by default by removing all unused JavaScript from the page.
-
-But sometimes, client-side JavaScript is required for creating interactive UI. Instead of forcing your entire page to become an SPA-like JavaScript application, ==Astro asks you to create an island==.
-
-With Astro Islands, ==the vast majority of your site remains pure, lightweight HTML and CSS==.
-
-
-[Comparing Astro to React components](https://blog.logrocket.com/understanding-astro-islands-architecture/#astro-islands)
-
-
-## What are the benefits of Island architecture?
-
-* JavaScript is only loaded for the individual components that need it.
-* **parallel loading** : the low-priority island doesn’t need to block the high-priority island.
-* You can tell Astro exactly how and when to render each component by some directive.
-
-
-## Basic File Structure
-
-1. src/components : reusable units of code for your HTML pages.
-2. src/layouts : Layouts are a special kind of component that wrap some content in a larger page layout. 
-3. src/pages : Pages are a special kind of component used to create new pages on your site. 
-
-::: warning
-src/pages is a required sub-directory in your Astro project. Without it, your site will have no pages or routes!
+When you include the layout frontmatter property in a `.md` file, **all of your frontmatter YAML values become props and are available to the layout file**.
 :::
 
 
 
+## Directives (unfinished)
+
+Template directives are a special kind of HTML attribute available inside of any Astro component template (.astro files), and some can also be used in .mdx files.
+
+Template directives are used to control an element or component’s behavior in some way.
+
+```
+<!-- This -->
+<span class:list={[ 'hello goodbye', { hello: true, world: true }, new Set([ 'hello', 'friend' ]) ]} />
+<!-- Becomes -->
+<span class="hello goodbye world friend"></span>
+```
+
+```html
+<style is:global>
+  body a { color: red; }
+</style>
+```
+
+
+## Astro.glob() API
+
+a way to load many local files into your static site setup.  It’s **asynchronous**, and returns an array of the exports from matching files.
+
+
+
+## Dynamic page routing
+
+You can create entire sets of pages dynamically using `.astro` files that export a `getStaticPaths()` function.
+
+The `getStaticPaths` function **returns an array of page routes**, and all of the pages at those routes will **use the same template defined in the file**.
+
+:::info
+Notice that using square brackets to name your file
+
+Ex: `src/pages/tags/[tag].astro` ->  `mysite/tags/astro` or `mysite/tags/superhero`...
+:::
+
+
+:::info
+
+In Astro’s default static output mode, these pages are generated at build time(SSG), and so **you must predetermine** the list of authors that get a corresponding file. In [SSR mode](https://docs.astro.build/en/guides/server-side-rendering/), a page will be generated on request for any route that matches.
+:::
+
+```javascript
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob('../posts/*.md');
+  return [
+    { params: { tag: 'astro' }, props: { posts: allPosts } },
+    { params: { tag: 'successes' }, props: { posts: allPosts } },
+    { params: { tag: 'community' }, props: { posts: allPosts } },
+    { params: { tag: 'blogging' }, props: { posts: allPosts } },
+    { params: { tag: 'setbacks' }, props: { posts: allPosts } },
+    { params: { tag: 'learning in public' }, props: { posts: allPosts } },
+  ];
+}
+
+// params will be used in the route, such as "mysite/tags/astro".
+// props are data that you want to pass to those pages
+```
+
+ 
+## Pagination
+
+Astro supports built-in pagination for large collections of data
+
+```jsx
+---
+export async function getStaticPaths({ paginate }) {
+  const astronautPages = [{
+    astronaut: 'Neil Armstrong',
+  }, {
+    astronaut: 'Buzz Aldrin',
+  }, {
+    astronaut: 'Sally Ride',
+  }, {
+    astronaut: 'John Glenn',
+  }];
+  // Generate pages from our array of astronauts, with 2 to a page
+  return paginate(astronautPages, { pageSize: 2 });
+}
+// All paginated data is passed on the "page" prop
+const { page } = Astro.props;
+---
+
+<!--Display the current page number. Astro.params.page can also be used!-->
+<h1>Page {page.currentPage}</h1>
+<ul>
+  <!--List the array of astronaut info-->
+  {page.data.map(({ astronaut }) => <li>{astronaut}</li>)}
+</ul>
+```
 
 
 ## Reference
 
-* [Why Astro ?](https://docs.astro.build/en/concepts/why-astro/)
-* [MPAs vs. SPAs](https://docs.astro.build/en/concepts/mpa-vs-spa/)
-* [Astro Islands](https://docs.astro.build/en/concepts/islands/)
-* [What are Islands?](https://www.youtube.com/watch?v=6F-lQe_BzeM&ab_channel=Astro)
+* [Learn more about flexibility in URL routing](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes)
+* [Pagination](https://docs.astro.build/en/core-concepts/routing/#pagination)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
