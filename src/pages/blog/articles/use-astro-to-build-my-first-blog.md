@@ -16,19 +16,20 @@ description: Learning how to build a website using Astro.js
 1. **A good choice for building content-focused website, not application-focused website**
 2. **leverages server-side rendering over client-side rendering as much as possible**
 
-<div class="info">
 
+<div class="bg-sky-100 rounded p-4 text-sky-600">
+
+<p>
 What are the issues when using SPA ?
 
 => With Single Page Applications, it may harm page performance and impact Time to Interactive (TTI).
 
 What is TTI ?
 
-=> Time to Interactive(TTI): It measures how long it takes a page to become fully interactive    
+=> Time to Interactive(TTI): It measures how long it takes a page to become fully interactive
     
-    
+</p>
 </div>
-
 
 
 ## MPA vs. SPA
@@ -39,12 +40,12 @@ What is TTI ?
 3. In SPAs, the router is handled locally and navigation to new pages is accomplished without hitting the server.
 
 
-:::info
+<div class="bg-sky-100 rounded p-4 text-sky-600">
+<p>
 SPAs can also offer more powerful transitions across page navigation because they control so much about page rendering. To match this support, MPAs leverage tools like Hotwire’s Turbo that mimic client routing by also controlling navigation in the browser. The HTML is still rendered on the server, but Turbo can now display a seamless transition between pages similar to client routing in an SPA.
-:::
-
+</p>
+</div>
 ## Astro Islands
-
 
 **Every component can choose how and when to ship JS**
 
@@ -58,11 +59,11 @@ The technique that this architectural pattern builds on is known as **partial or
 
 ## How it works ?
 
-**Astro generates every website with zero client-side JavaScript by default**. Use a frontend UI component built with React, Preact, Svelte, Vue, SolidJS, AlpineJS, or Lit and Astro will automatically render it to HTML ==ahead of time and then strip out all of the JavaScript==. This keeps every site fast by default by removing all unused JavaScript from the page.
+**Astro generates every website with zero client-side JavaScript by default**. Use a frontend UI component built with React, Preact, Svelte, Vue, SolidJS, AlpineJS, or Lit and Astro will automatically render it to HTML **ahead of time and then strip out all of the JavaScript**. This keeps every site fast by default by removing all unused JavaScript from the page.
 
-But sometimes, client-side JavaScript is required for creating interactive UI. Instead of forcing your entire page to become an SPA-like JavaScript application, ==Astro asks you to create an island==.
+But sometimes, client-side JavaScript is required for creating interactive UI. Instead of forcing your entire page to become an SPA-like JavaScript application, **Astro asks you to create an island**.
 
-With Astro Islands, ==the vast majority of your site remains pure, lightweight HTML and CSS==.
+With Astro Islands, **the vast majority of your site remains pure, lightweight HTML and CSS**.
 
 
 [Comparing Astro to React components](https://blog.logrocket.com/understanding-astro-islands-architecture/#astro-islands)
@@ -72,7 +73,7 @@ With Astro Islands, ==the vast majority of your site remains pure, lightweight H
 
 * JavaScript is only loaded for the individual components that need it.
 * **parallel loading** : the low-priority island doesn’t need to block the high-priority island.
-* You can tell Astro exactly how and when to render each component by some directive.
+* You can tell Astro exactly how and when to render each component by some [directives](https://docs.astro.build/en/reference/directives-reference/).
 
 
 ## Basic File Structure
@@ -81,9 +82,11 @@ With Astro Islands, ==the vast majority of your site remains pure, lightweight H
 2. src/layouts : Layouts are a special kind of component that wrap some content in a larger page layout. 
 3. src/pages : Pages are a special kind of component used to create new pages on your site. 
 
-::: warning
+<div class="bg-yellow-100 rounded p-4 text-amber-900">
+<p>
 src/pages is a required sub-directory in your Astro project. Without it, your site will have no pages or routes!
-:::
+</p>
+</div>
 
 
 
@@ -95,20 +98,6 @@ src/pages is a required sub-directory in your Astro project. Without it, your si
 * [MPAs vs. SPAs](https://docs.astro.build/en/concepts/mpa-vs-spa/)
 * [Astro Islands](https://docs.astro.build/en/concepts/islands/)
 * [What are Islands?](https://www.youtube.com/watch?v=6F-lQe_BzeM&ab_channel=Astro)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

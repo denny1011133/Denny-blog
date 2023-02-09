@@ -35,9 +35,12 @@ tags: ["astro", "blogging", "learning in public"]
 content goes here 
 ```
 
-:::info
-[Astro can use data from frontmatter as props in its layout component](https://docs.astro.build/en/guides/markdown-content/#frontmatter-layout)
-:::
+<div class="bg-sky-100 rounded p-4 text-sky-600">
+
+<a class="text-sky-600" href="https://docs.astro.build/en/guides/markdown-content/#frontmatter-layout">Astro can use data from frontmatter as props in its layout component</a>
+</div>
+
+
 
 ## Add dynamic content on `.astro` file
 
@@ -45,9 +48,10 @@ content goes here
 Use JavaScript expressions to define variables in frontmatter and use it in **curly brace** on `.astro`
 
 
-:::warning
-The Astro frontmatter script contains only JavaScript.
-:::
+<div class="bg-yellow-100 rounded p-4 text-amber-900">
+<p>The Astro frontmatter script contains only JavaScript.
+</p>
+</div>
 
 ## Props in Astro Component 
 
@@ -72,9 +76,9 @@ const name = "Astro"
 <p>I hope you have a wonderful day!</p>
 ```
 
-:::info
-[You can also define your props with TypeScript ](https://docs.astro.build/en/guides/typescript/#component-props)
-:::
+<div class="bg-sky-100 rounded p-4 text-sky-600">
+<a class="text-sky-600" href="https://docs.astro.build/en/guides/typescript/#component-props">You can also define your props with TypeScript</a>
+</div>
 
 ## Write client side script
 
@@ -88,11 +92,13 @@ Importing scripts is a good way to write your client-side scripts.
 </body>
 ```
 
-:::warning
+<div class="bg-yellow-100 rounded p-4 text-amber-900">
+<p>
 
-Some JavaScript expressions are executed at build time, such as mapping, variable usage, and conditional rendering, and then the code is **"thrown away"** However, the JavaScript in a script tag is still sent to the browser.
+Some JavaScript expressions are executed at build time, such as mapping, variable usage, and conditional rendering, and then the code is "thrown away" However, the JavaScript in a script tag is still sent to the browser.
+</p>
+</div>
 
-:::
 
 ## slot into child componet
 
@@ -131,9 +137,11 @@ author: 'Astro Learner'
 ```
 
 
-:::info
-When you include the layout frontmatter property in a `.md` file, **all of your frontmatter YAML values become props and are available to the layout file**.
-:::
+<div class="bg-sky-100 rounded p-4 text-sky-600">
+<p>
+When you include the layout frontmatter property in a .md file, all of your frontmatter YAML values become props and are available to the layout file.
+</p>
+</div>
 
 
 
@@ -178,17 +186,21 @@ You can create entire sets of pages dynamically using `[param].astro` files that
 
 The `getStaticPaths` function **returns an array of page routes**, and all of the pages at those routes will **use the same template defined in the file**.
 
-:::info
+<div class="bg-yellow-100 rounded p-4 text-amber-900">
+<p>
 Notice that using square brackets to name your file
 
-Ex: `src/pages/tags/[tag].astro` ->  `mysite/tags/astro` or `mysite/tags/superhero`...
-:::
+Ex: src/pages/tags/[tag].astro ->  mysite/tags/astro or mysite/tags/superhero...
+</p>
+</div>
+<br> 
+<div class="bg-sky-100 rounded p-4 text-sky-600">
+<p>
 
-
-:::info
-
-In Astro’s default static output mode, these pages are generated at build time(SSG), and so **you must predetermine** the list of authors that get a corresponding file. In [SSR mode](https://docs.astro.build/en/guides/server-side-rendering/), a page will be generated on request for any route that matches.
-:::
+In Astro’s default static output mode, these pages are generated at build time(SSG), and so you must predetermine the list of authors that get a corresponding file. 
+<a class="text-sky-600" href="https://docs.astro.build/en/guides/server-side-rendering/">In SSR mode</a>, a page will be generated on request for any route that matches.
+</p>
+</div>
 
 ```javascript
 export async function getStaticPaths() {

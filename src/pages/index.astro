@@ -16,18 +16,18 @@ const { metaData: { authorName }, social,languagesAndTools } = config;
 			class="rounded-md h-fit self-center justify-self-center">
 		<div class="flex flex-col flex-wrap flex-grow">
 			<h1
-				class="text-center bg-gradient-to-r from-sky-500 to-indigo-500 bg-clip-text text-transparent text-5xl mb-[0.7em]">
+				class="text-center bg-gradient-to-r from-green-500 to-blue-900 bg-clip-text text-transparent text-5xl mb-[0.7em]">
 				Hi there, I'm <span class="font-bold">{authorName}</span></h1>
-			<p class="text-center">
+			<p class="text-center text-xl">
 				A Full Stack Developer from Taiwan.</p>
-			<div class="flex flex-wrap justify-center gap-5 mt-4">
+			<div class="flex flex-wrap justify-center gap-5 mt-4 ">
 				{social.map(ele => <a class="w-8 h-8 flex scale-1 hover:scale-125 transition-[scale] justify-center" href={ele.link}
 					target="_blank" rel="noreferrer noopener">
 					<span class="sr-only">{`Link to my ${ele.sr?? capitalizeString(ele.link.replace(/.+\/\/|www.|\..+/g, ''))} account`}</span>
 					<Fragment set:html={ele.svg} />
 				</a> )}
 			</div>
-			<p class="text-center">
+			<p class="text-center text-xl">
 				Languages and Tools :</p>
 			<div class="flex flex-wrap justify-center gap-5 mt-4">
 				{languagesAndTools.map(e=><img src={e.link}title={e.title} alt={e.title} width="40" height="40" style="max-width: 100%;">)}
