@@ -109,6 +109,6 @@ export default {
     summary: 'My personal blog',
     category: 'Blog',
     keywords: ['Blog', 'Astro'],
-    icon: 'favicon.ico',
+    icon: 'astro.svg',
   },
 };
