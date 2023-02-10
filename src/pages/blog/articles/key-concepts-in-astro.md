@@ -254,6 +254,26 @@ const { page } = Astro.props;
 ```
 
 
+## astro.config.mjs
+
+### site
+
+```javascript
+{
+  site: 'https://www.my-site.dev' // put your deployed URL here to help Astro create a sitemap.
+}
+```
+### base
+
+ Astro will use this path as the root for your pages and assets both in development and in production build.
+
+In the example below, astro dev will start your server at /docs.
+
+```javascript
+{
+  base: '/docs'
+}
+```
 ## Reference
 
 * [Learn more about flexibility in URL routing](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes)

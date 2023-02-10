@@ -45,6 +45,7 @@ What is TTI ?
 SPAs can also offer more powerful transitions across page navigation because they control so much about page rendering. To match this support, MPAs leverage tools like Hotwire’s Turbo that mimic client routing by also controlling navigation in the browser. The HTML is still rendered on the server, but Turbo can now display a seamless transition between pages similar to client routing in an SPA.
 </p>
 </div>
+
 ## Astro Islands
 
 **Every component can choose how and when to ship JS**
