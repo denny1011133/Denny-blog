@@ -33,3 +33,8 @@ The main purpose of bridging is to enable the JavaScript code to access a native
 
 
 
+### Reference
+
+* [React Native's upcoming re‑architecture](https://collectivemind.dev/blog/react-native-re-architecture)
+* [How the React Native Bridge works (and how it will change in the future)](https://www.youtube.com/watch?v=TU_kTuz2i9Y&ab_channel=JimmyCook)
+
