@@ -5,7 +5,7 @@ date: 14 Feb 2023
 tags:
   - featured
   - React Native
-description: Concept of JS in React Native
+description: How JavaScript works with Native code
 ---
 
 ## UI Component
@@ -23,9 +23,13 @@ React Native is single-threaded, which means when one component is rendering, ot
 
 ### Three threads
 
-These three threads communicate with each other through the **bridge** by sending asynchronous JSON messages.
-
-The main purpose of bridging is to enable the JavaScript thread to receive a response from the native side eventually.
-
-
 ![Thread](https://i.imgur.com/dvpnZ9D.png)
+
+These threads communicate with each other through the **bridge** by sending asynchronous JSON messages.
+
+The bridge works as a communication mechanism between the JavaScript code running on the JavaScript thread and the native code running on the Main UI thread of the application.
+
+The main purpose of bridging is to enable the JavaScript code to access a native module or API.
+
+
+
