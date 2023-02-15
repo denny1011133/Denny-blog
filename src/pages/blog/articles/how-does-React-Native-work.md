@@ -5,7 +5,7 @@ date: 14 Feb 2023
 tags:
   - featured
   - React Native
-description: How JavaScript communicate with native code
+description: How JavaScript communicates with native code
 ---
 
 ## UI Component
