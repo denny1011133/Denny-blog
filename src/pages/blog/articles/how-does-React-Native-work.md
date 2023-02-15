@@ -5,16 +5,18 @@ date: 14 Feb 2023
 tags:
   - featured
   - React Native
-description: How JavaScript works with Native code
+description: How JavaScript communicate with native code
 ---
 
 ## UI Component
 
-In React Native, a component that is written in JSX is compiled to the relevant platform's component code.
+In React Native, a UI component that is written in JSX is compiled to the relevant platform's component code.
 
-![React Native UI](https://i.imgur.com/Kek0F6F.png)
+![React Native UI](https://i.imgur.com/KjB3D4d.png)
 
 ## JavaScript Logic
+
+JavaScript is not compiled but communicates with native code through a "bridge"
 
 ### single-threaded
 
