@@ -12,11 +12,11 @@ description: How JavaScript communicates with native code
 
 In React Native, an UI component that is written in JSX is compiled to the relevant platform's component code.
 
-![React Native UI](https://i.imgur.com/KjB3D4d.png)
+![React Native UI](https://i.imgur.com/Kek0F6F.png)
 
 ## JavaScript Logic
 
-JavaScript is not compiled but communicates with native code through a "bridge"
+JavaScript is not compiled but communicates with native code through **"bridge"**.
 
 ### single-threaded
 
@@ -25,7 +25,7 @@ React Native is single-threaded, which means when one component is rendering, ot
 
 ### Three threads
 
-![Thread](https://i.imgur.com/dvpnZ9D.png)
+![Thread](https://i.imgur.com/KjB3D4d.png)
 
 These threads communicate with each other through the **bridge** by sending asynchronous JSON messages.
 
