@@ -10,7 +10,7 @@ description: How JavaScript communicates with native code
 
 ## UI Component
 
-In React Native, a UI component that is written in JSX is compiled to the relevant platform's component code.
+In React Native, an UI component that is written in JSX is compiled to the relevant platform's component code.
 
 ![React Native UI](https://i.imgur.com/KjB3D4d.png)
 
