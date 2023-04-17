@@ -18,10 +18,6 @@ In React Native, an UI component that is written in JSX is compiled to the relev
 
 JavaScript is not compiled but communicates with native code through **"bridge"**.
 
-### single-threaded
-
-React Native is single-threaded, which means when one component is rendering, others have to wait in line. In contrast to that, native apps written in platform-specific languages perform all their operations synchronously, which has proven to benefit the app performance and run smoother.
-
 
 ### Three threads
 
